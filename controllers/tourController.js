@@ -252,7 +252,7 @@ exports.getToursStats = catchAsync(async (req, res, next) => {
       }
     }
   ]);
-  console.log('obj stats', stats);
+  //console.log('obj stats', stats);
 
   res.status(200).json({
     status: 'sucess',
