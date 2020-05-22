@@ -185,18 +185,18 @@ exports.resetPassword = async (req, res, next) => {
 
   // 4 log the user and send jwt token
 
-  createSendToken(newUser, 201, res);
+  createSendToken(user, 201, res);
 };
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
   // get user from colection
 
   const user = await User.findById(req.user.id).select('+password');
-  console.log(user);
+  //console.log(user);
 
   //check if the current passw is correct and
   if (!user.correctPassword(req.body.passwordCurrent, user.password)) {
-    return nex(AppError('Your current password is wrong! ', 401));
+    return next(AppError('Your current password is wrong! ', 401));
   }
 
   //if so update the password and
@@ -206,6 +206,6 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 
   //log the user in send the jwt
 
-  createSendToken(newUser, 200, res);
+  createSendToken(user, 200, res);
   next();
 });
